@@ -9,6 +9,8 @@ return {
       "svelte-language-server",
       "prisma-language-server",
       "emmet_language_server",
+      "clangd",
+      "clang-format"
       -- "gopls",
       -- "gofmt",
       -- "pyright",

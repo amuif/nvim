@@ -1,9 +1,5 @@
--- local servers = { "html", "cssls" }
--- vim.lsp.enable(servers)
---
 require("nvchad.configs.lspconfig").defaults()
 
--- Diagnostic UI config
 vim.diagnostic.config {
   virtual_text = true,
   float = {
@@ -20,7 +16,7 @@ local nvlsp = require "nvchad.configs.lspconfig"
 local base_opts = {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
- capabilities = require("blink.cmp").get_lsp_capabilities(),
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
 }
 
 -- List of servers using mostly default config
@@ -39,38 +35,7 @@ local servers = {
 for _, lsp in ipairs(servers) do
   local opts = vim.deepcopy(base_opts)
 
-  if lsp == "vtsls" then
-    opts = vim.tbl_deep_extend("force", opts, {
-      init_options = {
-        all = false, -- Critical: Avoid monorepo indexing leaks
-        projectReferences = true,
-        vueFeaturesInTS = true, -- If using Vue
-      },
-      settings = {
-        typescript = {
-          updateImportsOnFileMove = { enabled = "always" },
-          preferences = {
-            quotePreference = "auto",
-            includePackageJsonAutoImports = "off", -- Reduces auto-import bloat
-          },
-        },
-        completions = {
-          completeFunctionCalls = true, -- Less compute on suggestions
-          maxCompletions = 10, -- Cap items to curb RAM
-        },
-      },
-      single_file_support = false, -- No attach on isolated files
-      capabilities = vim.tbl_deep_extend("force", opts.capabilities, {
-        textDocument = {
-          completion = {
-            completionItem = {
-              snippetSupport = true, -- Disable if not using snippets (saves mem)
-            },
-          },
-        },
-      }),
-    })
-  elseif lsp == "tailwindcss" then
+  if lsp == "tailwindcss" then
     opts.filetypes = {
       "html",
       "php",
