@@ -35,7 +35,33 @@ local servers = {
 for _, lsp in ipairs(servers) do
   local opts = vim.deepcopy(base_opts)
 
-  if lsp == "tailwindcss" then
+  if lsp == "vtsls" then
+    opts = vim.tbl_deep_extend("force", opts, {
+      settings = {
+        typescript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          preferences = {
+            quotePreference = "auto",
+            includePackageJsonAutoImports = "off", -- Reduces auto-import bloat
+          },
+        },
+        completions = {
+          completeFunctionCalls = true, -- Less compute on suggestions
+          maxCompletions = 10, -- Cap items to curb RAM
+        },
+      },
+      single_file_support = false, -- No attach on isolated files
+      capabilities = vim.tbl_deep_extend("force", opts.capabilities, {
+        textDocument = {
+          completion = {
+            completionItem = {
+              snippetSupport = true, -- Disable if not using snippets (saves mem)
+            },
+          },
+        },
+      }),
+    })
+  elseif lsp == "tailwindcss" then
     opts.filetypes = {
       "html",
       "php",
