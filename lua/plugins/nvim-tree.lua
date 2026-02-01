@@ -7,5 +7,9 @@ return {
     git = {
       ignore = false, -- also show gitignored files
     },
+    view = {
+      side = "right",
+      width = 35, -- Adjust the width to your liking
+    },
   },
 }
