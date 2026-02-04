@@ -11,6 +11,8 @@ return {
       "svelte",
       "javascript",
       "typescript",
+      "json",
+      "jsonc",
     },
     highlight = {
       enable = true,

@@ -10,7 +10,8 @@ return {
       "prisma-language-server",
       "emmet_language_server",
       "clangd",
-      "clang-format"
+      "clang-format",
+      "json-lsp",
       -- "gopls",
       -- "gofmt",
       -- "pyright",

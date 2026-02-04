@@ -105,6 +105,21 @@ vim.lsp.config(
 )
 vim.lsp.enable "svelte"
 
+-- JSON(LS)
+vim.lsp.config(
+  "jsonls",
+  vim.tbl_deep_extend("force", base_opts, {
+    filetypes = { "json", "jsonc" },
+    settings = {
+      json = {
+        -- Optional but very recommended: use schemastore for auto-detection of common schemas
+        schemas = require("schemastore").json.schemas(),
+        validate = { enable = true },
+      },
+    },
+  })
+)
+vim.lsp.enable("jsonls")
 -- Go LSP setup
 -- vim.lsp.config("gopls", vim.tbl_deep_extend("force", base_opts, {
 --   cmd = { "gopls" },
