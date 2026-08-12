@@ -119,7 +119,26 @@ vim.lsp.config(
     },
   })
 )
-vim.lsp.enable("jsonls")
+vim.lsp.enable "jsonls"
+
+-- PHP (Intelephense) 7.4 configuration
+vim.lsp.config(
+  "intelephense",
+  vim.tbl_deep_extend("force", base_opts, {
+    filetypes = { "php" },
+    settings = {
+      intelephense = {
+        environment = {
+          phpVersion = "7.4.0", -- Enforces PHP 7.4 compatibility
+        },
+        files = {
+          maxSize = 5000000, -- Prevents large legacy vendor folders from crashing LSP
+        },
+      },
+    },
+  })
+)
+vim.lsp.enable "intelephense"
 -- Go LSP setup
 -- vim.lsp.config("gopls", vim.tbl_deep_extend("force", base_opts, {
 --   cmd = { "gopls" },

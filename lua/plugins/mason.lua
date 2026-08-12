@@ -12,6 +12,7 @@ return {
       "clangd",
       "clang-format",
       "json-lsp",
+      "rust-analyzer",
       -- "gopls",
       -- "gofmt",
       -- "pyright",

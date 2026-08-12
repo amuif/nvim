@@ -13,6 +13,8 @@ return {
       "typescript",
       "json",
       "jsonc",
+      "php",
+      "phpdoc",
     },
     highlight = {
       enable = true,
