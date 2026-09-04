@@ -83,47 +83,6 @@ for _, lsp in ipairs(servers) do
   vim.lsp.enable(lsp)
 end
 
--- Rust (rust_analyzer) configuration
-vim.lsp.config(
-  "rust_analyzer",
-  vim.tbl_deep_extend("force", base_opts, {
-    filetypes = { "rust" },
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = {
-          allFeatures = true,
-          loadOutDirsFromCheck = true,
-          buildScripts = {
-            enable = true,
-          },
-        },
-        checkOnSave = true,
-        check = {
-          command = "clippy", -- Runs `cargo clippy` instead of standard `cargo check`
-          extraArgs = { "--no-deps" },
-        },
-        procMacro = {
-          enable = true,
-          ignored = {
-            ["async-trait"] = { "async_trait" },
-            ["napi-derive"] = { "napi" },
-            ["async-recursion"] = { "async_recursion" },
-          },
-        },
-        inlayHints = {
-          bindingModeHints = { enable = false },
-          chainingHints = { enable = true },
-          closingBraceHints = { enable = true, minLines = 25 },
-          closureReturnTypeHints = { enable = "never" },
-          lifetimeElisionHints = { enable = "never", useParameterNames = false },
-          typeHints = { enable = true },
-        },
-      },
-    },
-  })
-)
-vim.lsp.enable "rust_analyzer"
-
 -- Svelte LSP setup (corrected for new API)
 vim.lsp.config(
   "svelte",
